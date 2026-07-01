@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="fr" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fadma Hsayn Cars - Location de voitures au Maroc</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --red: #E31E24;
+    --blue: #1B2D6B;
+    --dark: #0d1a3a;
+    --gray-light: #f5f6fa;
+    --gray-border: #e0e0e0;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-gray: #666;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', 'Cairo', sans-serif;
+    color: var(--text-dark);
+    overflow-x: hidden;
+    transition: all 0.3s;
+  }
+
+  body.rtl {
+    direction: rtl;
+    font-family: 'Cairo', 'Poppins', sans-serif;
+  }
+
+  body.rtl .nav-links { flex-direction: row-reverse; }
+  body.rtl .logo { flex-direction: row-reverse; }
+  body.rtl .logo-text { text-align: right; }
+  body.rtl .hero-content { text-align: right; }
+  body.rtl .nav-phone { flex-direction: row-reverse; }
+  body.rtl .booking-field .input-wrap i { left: auto; right: 12px; }
+  body.rtl .booking-field select,
+  body.rtl .booking-field input { padding: 11px 35px 11px 12px; text-align: right; }
+  body.rtl .booking-field.select-field .input-wrap::after { right: auto; left: 12px; }
+  body.rtl .feature-item { flex-direction: row-reverse; text-align: right; }
+  body.rtl .footer-links a { flex-direction: row-reverse; }
+  body.rtl .contact-item { flex-direction: row-reverse; }
+  body.rtl .dropdown-menu { left: auto; right: 0; }
+  body.rtl .agency-plane { left: auto; right: 20px; }
+  body.rtl .agency-link { flex-direction: row-reverse; }
+  body.rtl .btn-reserve { flex-direction: row-reverse; }
+  body.rtl .btn-book { flex-direction: row-reverse; }
+  body.rtl .agency-info { text-align: right; }
+  body.rtl .car-card { text-align: center; }
+  body.rtl .modal-content { text-align: right; }
+  body.rtl .modal-close { right: auto; left: 15px; }
+
+  body.rtl .nav-phone { direction: ltr; unicode-bidi: isolate; }
+  body.rtl .mobile-phone { direction: ltr; unicode-bidi: isolate; }
+  body.rtl .contact-item span { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+  /* Glassmorphism Navbar */
+  .navbar {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .logo { transition: transform var(--transition-fast); }
+  .logo:hover { transform: scale(1.02); }
+  .logo-img { transition: transform var(--transition-bounce); }
+  .logo:hover .logo-img { transform: rotate(-5deg) scale(1.05); }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--red);
+    border-radius: 2px;
+    transition: width var(--transition-smooth), left var(--transition-smooth);
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { width: 100%; left: 0; }
+
+  .nav-phone {
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-phone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--red);
+    transition: left var(--transition-smooth);
+    z-index: -1;
+  }
+  .nav-phone:hover::before { left: 0; }
+  .nav-phone:hover { color: var(--white); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(227,30,36,0.3); }
+  .nav-phone .fa-phone { transition: transform var(--transition-bounce); }
+  .nav-phone:hover .fa-phone { transform: rotate(15deg) scale(1.2); }
+
+  .lang-btn {
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+  }
+  .lang-btn.active { transform: scale(1.05); box-shadow: 0 2px 10px rgba(27,45,107,0.3); }
+  .lang-btn:hover { transform: translateY(-2px); }
+  .lang-btn.active:hover { transform: scale(1.05) translateY(-2px); }
+
+  .hero-img { transition: transform 8s ease; }
+  .hero:hover .hero-img { transform: scale(1.05); }
+
+  .hero-title { animation: slideInLeft 1s ease forwards; opacity: 0; }
+  .hero-title .accent { position: relative; }
+  .hero-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--red);
+    border-radius: 2px;
+    animation: expandWidth 1s ease 0.5s forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes expandWidth { to { transform: scaleX(1); } }
+
+  .hero-subtitle { animation: fadeInUp 1s ease 0.3s forwards; opacity: 0; }
+  .hero-badges { animation: fadeInUp 1s ease 0.6s forwards; opacity: 0; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-badge { transition: transform var(--transition-smooth); }
+  .hero-badge:hover { transform: translateY(-8px); }
+  .hero-badge-icon { transition: all var(--transition-bounce); position: relative; overflow: hidden; }
+  .hero-badge-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--red), var(--blue));
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+    border-radius: 50%;
+  }
+  .hero-badge:hover .hero-badge-icon::before { opacity: 0.1; }
+  .hero-badge:hover .hero-badge-icon { transform: scale(1.15) rotate(5deg); box-shadow: 0 6px 20px rgba(227,30,36,0.2); }
+  .hero-badge-text { transition: color var(--transition-fast); }
+  .hero-badge:hover .hero-badge-text { color: var(--red); }
+
+  .booking-field label { transition: color var(--transition-fast); }
+  .booking-field:focus-within label { color: var(--blue); }
+  .booking-field .input-wrap i { transition: color var(--transition-fast), transform var(--transition-bounce); }
+  .booking-field:focus-within .input-wrap i { color: var(--blue); transform: translateY(-50%) scale(1.2); }
+  .booking-field select,
+  .booking-field input { transition: all var(--transition-smooth); }
+  .booking-field select:focus,
+  .booking-field input:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(27,45,107,0.1); transform: translateY(-2px); }
+
+  .btn-book {
+    background: linear-gradient(135deg, var(--red), #c01820);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(227,30,36,0.3);
+  }
+  .btn-book::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-book:hover::before { left: 100%; }
+  .btn-book:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(227,30,36,0.4); }
+  .btn-book i { transition: transform var(--transition-fast); }
+  .btn-book:hover i { transform: translateX(5px); }
+
+  .section-title { transition: transform var(--transition-smooth); }
+  .section-title:hover { transform: scale(1.02); }
+  .section-title::before,
+  .section-title::after { transition: all var(--transition-smooth); }
+  .section-title:hover::before { margin-right: 20px; }
+  .section-title:hover::after { margin-left: 20px; }
+
+  .agency-card { position: relative; overflow: hidden; }
+  .agency-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--blue));
+    transform: scaleX(0);
+    transition: transform var(--transition-smooth);
+    z-index: 2;
+  }
+  .agency-card:hover::before { transform: scaleX(1); }
+  .agency-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+  .agency-img { transition: transform var(--transition-smooth); }
+  .agency-card:hover .agency-img { transform: scale(1.08); }
+  .agency-plane { transition: all var(--transition-bounce); z-index: 3; }
+  .agency-card:hover .agency-plane { transform: rotate(15deg) scale(1.1); border-color: var(--red); color: var(--red); }
+  .agency-label { transition: color var(--transition-fast); }
+  .agency-card:hover .agency-label { color: var(--red); }
+  .agency-name { transition: color var(--transition-fast); }
+  .agency-card:hover .agency-name { color: var(--red); }
+  .agency-link { position: relative; transition: all var(--transition-fast); }
+  .agency-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--red);
+    transition: width var(--transition-smooth);
+  }
+  .agency-link:hover::after { width: 100%; }
+  .agency-link i { transition: transform var(--transition-fast); }
+  .agency-link:hover i { transform: translateX(5px); }
+
+  .car-card { position: relative; overflow: hidden; border: 2px solid transparent; transition: all var(--transition-smooth); }
+  .car-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--blue));
+    transform: scaleX(0);
+    transition: transform var(--transition-smooth);
+  }
+  .car-card:hover::before { transform: scaleX(1); }
+  .car-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-hover); border-color: rgba(227,30,36,0.1); }
+  .car-img { transition: transform var(--transition-smooth); }
+  .car-card:hover .car-img { transform: scale(1.05); }
+  .car-name { transition: color var(--transition-fast); }
+  .car-card:hover .car-name { color: var(--blue); }
+  .car-spec i { transition: color var(--transition-fast); }
+  .car-card:hover .car-spec i { color: var(--red); }
+  .car-price { transition: transform var(--transition-bounce); }
+  .car-card:hover .car-price { transform: scale(1.1); }
+
+  .btn-reserve { position: relative; overflow: hidden; }
+  .btn-reserve::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--red);
+    transition: left var(--transition-smooth);
+    z-index: -1;
+  }
+  .btn-reserve:hover::before { left: 0; }
+  .btn-reserve:hover { color: var(--white); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(227,30,36,0.3); }
+  .btn-reserve i { transition: transform var(--transition-fast); }
+  .btn-reserve:hover i { transform: translateX(5px); }
+
+  .feature-item { transition: all var(--transition-smooth); border-radius: 12px; cursor: pointer; }
+  .feature-item:hover { background: var(--gray-light); transform: translateY(-5px); }
+  .feature-icon { transition: all var(--transition-bounce); }
+  .feature-item:hover .feature-icon { transform: scale(1.15) rotate(10deg); }
+  .feature-text h4 { transition: color var(--transition-fast); }
+  .feature-item:hover .feature-text h4 { color: var(--red); }
+
+  .cta-text h2 { transition: color var(--transition-smooth); }
+  .cta-text:hover h2 { color: var(--red); }
+  .btn-cta {
+    background: linear-gradient(135deg, var(--red), #c01820);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(227,30,36,0.3);
+  }
+  .btn-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-cta:hover::before { left: 100%; }
+  .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(227,30,36,0.4); }
+  .cta-car img { animation: floatCar 3s ease-in-out infinite; }
+  @keyframes floatCar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+  .social-btn { position: relative; overflow: hidden; transition: all var(--transition-bounce); }
+  .social-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--blue);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform var(--transition-bounce);
+  }
+  .social-btn:hover::before { transform: scale(1); }
+  .social-btn:hover { border-color: var(--blue); color: var(--white); transform: translateY(-3px); }
+  .social-btn i { position: relative; z-index: 1; transition: transform var(--transition-bounce); }
+  .social-btn:hover i { transform: scale(1.2); }
+
+  .footer-links a { transition: all var(--transition-fast); padding: 4px 0; }
+  .footer-links a:hover { color: var(--red); transform: translateX(5px); }
+  .footer-links a i { transition: color var(--transition-fast); }
+  .footer-links a:hover i { color: var(--red); }
+
+  .contact-item { transition: all var(--transition-fast); padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+  .contact-item:hover { background: var(--gray-light); color: var(--blue); transform: translateX(5px); }
+  .contact-item i { transition: transform var(--transition-bounce); }
+  .contact-item:hover i { transform: scale(1.2); }
+
+  .mobile-menu.open { animation: slideDown 0.3s ease; }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .mobile-menu a { transition: all var(--transition-fast); }
+  .mobile-menu a:hover, .mobile-menu a.active { transform: translateX(5px); }
+  .mobile-phone { background: linear-gradient(135deg, var(--red), #c01820); transition: all var(--transition-smooth); }
+  .mobile-phone:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(227,30,36,0.3); }
+
+  .modal-overlay { backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+  .modal { transform: scale(0.9) translateY(20px); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+  .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+  .modal-close { transition: all var(--transition-bounce); }
+  .modal-close:hover { transform: rotate(90deg) scale(1.1); }
+  .form-group label { transition: color var(--transition-fast); }
+  .form-group:focus-within label { color: var(--blue); }
+  .form-group input,
+  .form-group textarea,
+  .form-group select { transition: all var(--transition-smooth); }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(27,45,107,0.1); transform: translateY(-2px); }
+  .btn-submit {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+  }
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+  }
+  .btn-submit:hover::before { left: 100%; }
+  .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+  .btn-submit i { transition: transform var(--transition-bounce); }
+  .btn-submit:hover i { transform: scale(1.2); }
+
+  /* Toast Notifications */
+  .toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+  .toast { background: var(--blue); color: var(--white); padding: 14px 24px; border-radius: 10px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; animation: toastIn 0.4s ease forwards; pointer-events: all; min-width: 280px; justify-content: space-between; }
+  .toast.error { background: var(--red); }
+  .toast.success { background: #2ecc71; }
+  .toast.hiding { animation: toastOut 0.4s ease forwards; }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes toastOut { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(20px) scale(0.9); } }
+  .toast-close { background: none; border: none; color: var(--white); cursor: pointer; font-size: 16px; opacity: 0.7; transition: opacity var(--transition-fast); }
+  .toast-close:hover { opacity: 1; }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--gray-light); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+
+  /* Info Cards */
+  .info-cards-section { background: var(--white); padding: 50px 40px; }
+  .info-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+  .info-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all var(--transition-smooth);
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--red), var(--blue));
+    transform: scaleX(0);
+    transition: transform var(--transition-smooth);
+  }
+  .info-card:hover::before { transform: scaleX(1); }
+  .info-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: rgba(227,30,36,0.1); }
+  .info-card-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 24px;
+    transition: all var(--transition-bounce);
+  }
+  .info-card:hover .info-card-icon { transform: scale(1.15) rotate(5deg); }
+  .info-card-icon.red { background: #ffe0e1; color: var(--red); }
+  .info-card-icon.blue { background: #e0e6f8; color: var(--blue); }
+  .info-card-icon.green { background: #e0f5e9; color: #2ecc71; }
+  .info-card-icon.orange { background: #fff3e0; color: #f39c12; }
+  .info-card h4 { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+  .info-card p { font-size: 12px; color: var(--text-gray); line-height: 1.5; }
+
+  /* ── NAVBAR ── */
+  .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.08); padding: 0 40px; height: 70px; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s; }
+  .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-img { height: 55px; width: auto; object-fit: contain; }
+  .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .logo-text span:first-child { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 1.5px; }
+  .logo-text span:last-child { font-size: 9px; font-weight: 500; color: var(--red); letter-spacing: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 35px; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 13px; font-weight: 500; color: var(--text-dark); letter-spacing: 0.5px; transition: color 0.2s; position: relative; cursor: pointer; }
+  .nav-links a.active { color: var(--red); font-weight: 600; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-links .has-dropdown { position: relative; }
+  .nav-links .has-dropdown > a .fa-chevron-down { font-size: 10px; margin-left: 4px; transition: transform 0.2s; }
+  body.rtl .nav-links .has-dropdown > a .fa-chevron-down { margin-left: 0; margin-right: 4px; }
+  .nav-links .has-dropdown:hover > a .fa-chevron-down { transform: rotate(180deg); }
+  .dropdown-menu { position: absolute; top: calc(100% + 10px); left: 0; background: var(--white); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); min-width: 220px; padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.25s; z-index: 100; }
+  .nav-links .has-dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .dropdown-menu a { display: block; padding: 10px 18px; font-size: 13px; color: var(--text-dark); transition: background 0.2s, color 0.2s; cursor: pointer; text-decoration: none; }
+  .dropdown-menu a:hover { background: var(--gray-light); color: var(--red); padding-left: 22px; }
+  body.rtl .dropdown-menu a:hover { padding-left: 18px; padding-right: 22px; }
+  .nav-phone { display: flex; align-items: center; gap: 8px; border: 2px solid var(--red); border-radius: 30px; padding: 8px 18px; text-decoration: none; color: var(--red); font-size: 13px; font-weight: 600; z-index: 1; }
+  .nav-phone .fa-phone { font-size: 14px; }
+  .lang-switcher { display: flex; align-items: center; gap: 6px; margin-left: 15px; margin-right: 15px; }
+  .lang-btn { border: 1.5px solid var(--gray-border); border-radius: 20px; padding: 6px 12px; font-family: 'Poppins', 'Cairo', sans-serif; font-size: 11px; font-weight: 600; cursor: pointer; background: var(--white); color: var(--text-gray); white-space: nowrap; }
+  .lang-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .hamburger span { display: block; width: 25px; height: 2.5px; background: var(--text-dark); border-radius: 2px; transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .hero { margin-top: 70px; position: relative; min-height: calc(100vh - 70px); max-height: 680px; overflow: hidden; background: #e8eef5; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.97) 45%, rgba(255,255,255,0.2) 100%); z-index: 1; }
+  body.rtl .hero-bg { background: linear-gradient(225deg, rgba(255,255,255,0.97) 45%, rgba(255,255,255,0.2) 100%); }
+  .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+  body.rtl .hero-img { object-position: left center; }
+  .hero-content { position: relative; z-index: 2; padding: 60px 40px 40px; max-width: 560px; }
+  .hero-title { font-size: 46px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--blue); }
+  .hero-title .accent { color: var(--red); display: block; }
+  .hero-subtitle { font-size: 14px; color: #555; font-weight: 400; max-width: 320px; line-height: 1.6; margin-bottom: 40px; }
+  .hero-badges { display: flex; gap: 30px; flex-wrap: wrap; }
+  .hero-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  .hero-badge-icon { width: 44px; height: 44px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-size: 18px; color: var(--blue); }
+  .hero-badge-text { font-size: 11px; font-weight: 500; color: var(--text-dark); line-height: 1.3; max-width: 70px; }
+
+  .booking-bar { background: var(--white); box-shadow: 0 6px 30px rgba(0,0,0,0.1); padding: 20px 40px; margin: 0; }
+  .booking-form { display: flex; align-items: flex-end; gap: 12px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .booking-field { flex: 1; min-width: 150px; }
+  .booking-field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; letter-spacing: 0.3px; }
+  .booking-field .input-wrap { position: relative; }
+  .booking-field .input-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999; font-size: 13px; pointer-events: none; }
+  .booking-field select,
+  .booking-field input { width: 100%; padding: 11px 12px 11px 35px; border: 1.5px solid var(--gray-border); border-radius: 6px; font-family: 'Poppins', 'Cairo', sans-serif; font-size: 12.5px; color: #555; background: var(--white); appearance: none; -webkit-appearance: none; cursor: pointer; outline: none; }
+  .booking-field.select-field .input-wrap::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #999; font-size: 11px; pointer-events: none; }
+  .btn-book { color: var(--white); border: none; border-radius: 6px; padding: 12px 22px; font-family: 'Poppins', 'Cairo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+
+  section { padding: 70px 40px; }
+  .section-header { text-align: center; margin-bottom: 50px; }
+  .section-title { font-size: 28px; font-weight: 800; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; position: relative; display: inline-block; }
+  .section-title::before,
+  .section-title::after { content: '—'; color: var(--red); margin: 0 15px; font-weight: 300; }
+  .section-subtitle { font-size: 13.5px; color: var(--text-gray); margin-top: 8px; font-weight: 400; }
+
+  .agencies { background: var(--white); }
+  .agencies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1100px; margin: 0 auto; }
+  .agency-card { border-radius: 12px; box-shadow: var(--shadow); cursor: pointer; background: var(--white); }
+  .agency-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .agency-info { padding: 20px; background: var(--white); position: relative; }
+  .agency-plane { position: absolute; top: -22px; left: 20px; width: 44px; height: 44px; background: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: var(--blue); font-size: 18px; border: 2px solid var(--gray-border); }
+  .agency-label { font-size: 10px; font-weight: 600; color: var(--text-gray); letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; display: block; }
+  .agency-name { font-size: 17px; font-weight: 800; color: var(--blue); margin: 3px 0 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .agency-link { font-size: 13px; font-weight: 600; color: var(--red); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+
+  .fleet { background: var(--gray-light); }
+  .fleet-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; max-width: 1200px; margin: 0 auto; }
+  .car-card { background: var(--white); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); text-align: center; cursor: pointer; }
+  .car-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+  .car-name { font-size: 13.5px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .car-specs { display: flex; gap: 12px; justify-content: center; margin-bottom: 10px; }
+  .car-spec { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-gray); }
+  .car-spec i { font-size: 11px; color: #aaa; }
+  .car-price { font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: 14px; }
+  .car-price span { font-size: 12px; font-weight: 400; color: #999; }
+  .btn-reserve { width: 100%; padding: 9px 15px; border: 1.5px solid var(--red); border-radius: 6px; background: transparent; color: var(--red); font-family: 'Poppins', 'Cairo', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; z-index: 1; }
+
+  .features-bar { background: var(--white); padding: 40px; border-top: 1px solid var(--gray-border); }
+  .features-grid { display: flex; gap: 0; max-width: 1100px; margin: 0 auto; justify-content: space-around; flex-wrap: wrap; }
+  .feature-item { display: flex; align-items: flex-start; gap: 14px; padding: 15px 20px; flex: 1; min-width: 180px; max-width: 220px; }
+  .feature-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+  .feature-icon.red { background: #ffe0e1; color: var(--red); }
+  .feature-icon.blue { background: #e0e6f8; color: var(--blue); }
+  .feature-icon.green { background: #e0f5e9; color: #2ecc71; }
+  .feature-icon.orange { background: #fff3e0; color: #f39c12; }
+  .feature-icon.purple { background: #f0e6f8; color: #9b59b6; }
+  .feature-text h4 { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 3px; }
+  .feature-text p { font-size: 11.5px; color: var(--text-gray); line-height: 1.4; }
+
+  .cta-banner { background: var(--gray-light); padding: 60px 40px; border-top: 1px solid #e5e7ef; }
+  .cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+  .cta-text h2 { font-size: 30px; font-weight: 800; color: var(--blue); line-height: 1.2; margin-bottom: 10px; }
+  .cta-text p { font-size: 13.5px; color: var(--text-gray); margin-bottom: 25px; line-height: 1.6; }
+  .btn-cta { display: inline-block; color: var(--white); padding: 14px 30px; border-radius: 6px; font-size: 13px; font-weight: 700; text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; border: none; cursor: pointer; }
+  .cta-car img { width: 100%; max-width: 380px; display: block; }
+
+  footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 50px 40px 20px; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding-bottom: 40px; border-bottom: 1px solid var(--gray-border); }
+  .footer-brand p { font-size: 12px; color: var(--text-gray); line-height: 1.7; margin: 12px 0 20px; max-width: 230px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--gray-border); display: flex; align-items: center; justify-content: center; color: var(--text-dark); font-size: 14px; text-decoration: none; }
+  .footer-col h4 { font-size: 13.5px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-links a { text-decoration: none; font-size: 13px; color: var(--text-gray); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .footer-links a i { font-size: 12px; color: var(--blue); }
+  .footer-contact { display: flex; flex-direction: column; gap: 12px; }
+  .contact-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-gray); }
+  .contact-item i { width: 24px; text-align: center; }
+  .contact-item .fa-phone { color: var(--blue); }
+  .contact-item .fa-whatsapp { color: #25D366; }
+  .contact-item .fa-envelope { color: var(--red); }
+  .footer-bottom { text-align: center; padding: 20px; font-size: 12px; color: var(--text-gray); max-width: 1100px; margin: 0 auto; }
+
+  .mobile-menu { display: none; position: fixed; top: 70px; left: 0; right: 0; background: var(--white); z-index: 999; box-shadow: 0 10px 30px rgba(0,0,0,0.15); padding: 20px; flex-direction: column; gap: 5px; max-height: calc(100vh - 70px); overflow-y: auto; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--text-dark); padding: 12px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .mobile-menu a:hover, .mobile-menu a.active { background: var(--gray-light); color: var(--red); }
+  .mobile-phone { margin-top: 10px; padding: 12px 15px; color: var(--white); border-radius: 8px; text-align: center; font-weight: 600; font-size: 14px; text-decoration: none; }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; }
+  .modal-overlay.open { opacity: 1; visibility: visible; }
+  .modal { background: var(--white); border-radius: 16px; padding: 30px; max-width: 550px; width: 90%; position: relative; max-height: 90vh; overflow-y: auto; }
+  .modal-close { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; border-radius: 50%; border: none; background: var(--gray-light); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--text-dark); z-index: 10; }
+  .modal h2 { font-size: 22px; font-weight: 800; color: var(--blue); margin-bottom: 20px; text-align: center; }
+  .form-group { margin-bottom: 15px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select { width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-border); border-radius: 8px; font-family: 'Poppins', 'Cairo', sans-serif; font-size: 13px; color: #555; outline: none; }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: flex; gap: 12px; }
+  .form-row .form-group { flex: 1; }
+  .btn-submit { width: 100%; padding: 13px 20px; color: var(--white); border: none; border-radius: 8px; font-family: 'Poppins', 'Cairo', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+  @media (max-width: 1100px) { .fleet-grid { grid-template-columns: repeat(3, 1fr); } .cta-inner { grid-template-columns: 1fr; } .cta-car { display: none; } .info-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .navbar { padding: 0 20px; } .nav-links, .nav-phone { display: none; } .hamburger { display: flex; } .hero-title { font-size: 34px; } .agencies-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } .fleet-grid { grid-template-columns: repeat(2, 1fr); } .footer-top { grid-template-columns: 1fr 1fr; } section { padding: 50px 20px; } .booking-bar { padding: 20px; } .booking-form { flex-direction: column; } .booking-field { flex: 1 1 100%; min-width: unset; } .btn-book { width: 100%; justify-content: center; } .hero-content { padding: 40px 20px 30px; } .features-grid { gap: 10px; } .lang-switcher { margin-left: 10px; margin-right: 10px; } .info-cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .fleet-grid { grid-template-columns: 1fr 1fr; } .hero-title { font-size: 28px; } .footer-top { grid-template-columns: 1fr; } .section-title { font-size: 22px; } .cta-text h2 { font-size: 24px; } .form-row { flex-direction: column; } .lang-switcher { gap: 3px; } .lang-btn { padding: 5px 8px; font-size: 10px; } .info-cards-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 400px) { .fleet-grid { grid-template-columns: 1fr; } }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+  .fade-up-delay-3 { transition-delay: 0.3s; }
+  .fade-up-delay-4 { transition-delay: 0.4s; }
+  .fade-up-delay-5 { transition-delay: 0.5s; }
+</style>
+<base target="_self">
+</head>
+<body id="bodyRoot">
+
+<div class="toast-container" id="toastContainer"></div>
+
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <img class="logo-img" src="images/logo.png" alt="Fadma Hsayn Cars" onerror="this.style.display='none';this.parentElement.querySelector('.logo-text').style.display='flex';">
+    <div class="logo-text"><span>FADMA HSAYN</span><span>CARS</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" data-key="home" data-section="home" class="nav-link active">ACCUEIL</a></li>
+    <li><a href="#fleet" data-key="vehicles" data-section="fleet" class="nav-link">VÉHICULES</a></li>
+    <li class="has-dropdown">
+      <a href="#agencies" data-key="agencies" data-section="agencies" class="nav-link">NOS AGENCES <i class="fa-solid fa-chevron-down"></i></a>
+      <div class="dropdown-menu">
+        <a href="#agencies" data-key="agency1" onclick="scrollToAgencies()">وكالة مطار مراكش</a>
+        <a href="#agencies" data-key="agency2" onclick="scrollToAgencies()">وكالة مرزوكة</a>
+        <a href="#agencies" data-key="agency3" onclick="scrollToAgencies()">وكالة مطار الرشيدية</a>
+      </div>
+    </li>
+    <li><a href="#about" data-key="about" data-section="about" class="nav-link">À PROPOS</a></li>
+    <li><a href="#contact" data-key="contact" data-section="contact" class="nav-link">CONTACT</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+    <button class="lang-btn active" data-lang="ar" onclick="setLanguage('ar')">AR</button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  </div>
+  <a href="tel:+212661371670" class="nav-phone"><i class="fa-solid fa-phone"></i> +212 6 61 37 16 70</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" data-key="home" data-section="home" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Accueil</a>
+  <a href="#fleet" data-key="vehicles" data-section="fleet" class="mobile-nav-link"><i class="fa-solid fa-car"></i> Véhicules</a>
+  <a href="#agencies" data-key="agencies" data-section="agencies" class="mobile-nav-link"><i class="fa-solid fa-plane"></i> Nos Agences</a>
+  <a href="#about" data-key="about" data-section="about" class="mobile-nav-link"><i class="fa-solid fa-info-circle"></i> À Propos</a>
+  <a href="#contact" data-key="contact" data-section="contact" class="mobile-nav-link"><i class="fa-solid fa-envelope"></i> Contact</a>
+  <a href="tel:+212661371670" class="mobile-phone"><i class="fa-solid fa-phone"></i> +212 6 61 37 16 70</a>
+</div>
+
+<section class="hero" id="home">
+  <img class="hero-img" src="images/sora1.jpeg" alt="Aéroport Marrakech Menara" onerror="this.style.display='none';this.nextElementSibling.style.background='linear-gradient(135deg, rgba(255,255,255,0.97) 45%, #1B2D6B 100%)';">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="hero-title fade-up" data-key="hero_title">VOTRE VOYAGE<span class="accent">COMMENCE</span>DÈS VOTRE ARRIVÉE</h1>
+    <p class="hero-subtitle fade-up fade-up-delay-1" data-key="hero_subtitle">Location de voitures dans les principaux aéroports du Maroc</p>
+    <div class="hero-badges fade-up fade-up-delay-2">
+      <div class="hero-badge"><div class="hero-badge-icon"><i class="fa-solid fa-plane-arrival"></i></div><span class="hero-badge-text" data-key="badge1">Livraison à l'aéroport</span></div>
+      <div class="hero-badge"><div class="hero-badge-icon"><i class="fa-solid fa-shield-halved"></i></div><span class="hero-badge-text" data-key="badge2">Assurance incluse</span></div>
+      <div class="hero-badge"><div class="hero-badge-icon"><i class="fa-solid fa-headset"></i></div><span class="hero-badge-text" data-key="badge3">Support 24/7</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="booking-bar" id="bookingBar">
+  <div class="booking-form">
+    <div class="booking-field select-field"><label data-key="pickup_location">Lieu de prise en charge</label><div class="input-wrap"><i class="fa-solid fa-location-dot"></i><select id="pickupSelect"><option value="" data-key="select_airport">Sélectionnez un aéroport</option><option value="وكالة مطار مراكش">وكالة مطار مراكش</option><option value="وكالة مرزوكة">وكالة مرزوكة</option><option value="وكالة مطار الرشيدية">وكالة مطار الرشيدية</option></select></div></div>
+    <div class="booking-field"><label data-key="pickup_date">Date de départ</label><div class="input-wrap"><i class="fa-regular fa-calendar"></i><input type="date" id="pickupDate"></div></div>
+    <div class="booking-field"><label data-key="return_date">Date de retour</label><div class="input-wrap"><i class="fa-regular fa-calendar"></i><input type="date" id="returnDate"></div></div>
+    <button class="btn-book" onclick="openBookingModal()" data-key="book_now">RÉSERVER MAINTENANT <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</div>
+
+<section class="agencies" id="agencies">
+  <div class="section-header fade-up"><h2 class="section-title" data-key="agencies_title">NOS AGENCES</h2><p class="section-subtitle" data-key="agencies_subtitle">Nous sommes présents dans les principaux aéroports du Maroc</p></div>
+  <div class="agencies-grid">
+    <div class="agency-card fade-up fade-up-delay-1"><img class="agency-img" src="images/sora2.jpeg" alt="Marrakech" onerror="this.style.display='none'"><div class="agency-info"><div class="agency-plane"><i class="fa-solid fa-plane"></i></div><span class="agency-label" data-key="airport_label">AÉROPORT</span><h3 class="agency-name">MARRAKECH MENARA</h3><span class="agency-link" onclick="openAgencyMap('marrakech')" data-key="see_agency">Voir l'agence <i class="fa-solid fa-arrow-right"></i></span></div></div>
+    <div class="agency-card fade-up fade-up-delay-2"><img class="agency-img" src="images/sora4.jpeg" alt="Merzouga" onerror="this.style.display='none'"><div class="agency-info"><div class="agency-plane"><i class="fa-solid fa-map-location-dot"></i></div><span class="agency-label" data-key="agency_label_merzouga">AGENCE</span><h3 class="agency-name">MERZOUGA</h3><span class="agency-link" onclick="openAgencyMap('merzouga')" data-key="see_agency">Voir l'agence <i class="fa-solid fa-arrow-right"></i></span></div></div>
+    <div class="agency-card fade-up fade-up-delay-3"><img class="agency-img" src="images/sora3.jpeg" alt="Errachidia" onerror="this.style.display='none'"><div class="agency-info"><div class="agency-plane"><i class="fa-solid fa-plane"></i></div><span class="agency-label" data-key="airport_label">AÉROPORT</span><h3 class="agency-name">ERRACHIDIA</h3><span class="agency-link" onclick="openAgencyMap('errachidia')" data-key="see_agency">Voir l'agence <i class="fa-solid fa-arrow-right"></i></span></div></div>
+  </div>
+</section>
+
+<section class="fleet" id="fleet">
+  <div class="section-header fade-up"><h2 class="section-title" data-key="fleet_title">NOTRE FLOTTE</h2><p class="section-subtitle" data-key="fleet_subtitle">Une large sélection de véhicules adaptés à tous vos besoins</p></div>
+  <div class="fleet-grid" id="fleetGrid">
+    <!-- 20 سيارات -->
+    <div class="car-card fade-up fade-up-delay-1"><img class="car-img" src="images/cars1.jpeg" alt="Duster" onerror="this.style.display='none'"><h3 class="car-name">DUSTER</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">400 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Duster')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-1"><img class="car-img" src="images/cars2.jpeg" alt="Sandero" onerror="this.style.display='none'"><h3 class="car-name">SANDERO</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Sandero')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-1"><img class="car-img" src="images/cars3.jpeg" alt="Accent" onerror="this.style.display='none'"><h3 class="car-name">ACCENT</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">350 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Accent')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-1"><img class="car-img" src="images/cars4.jpeg" alt="Grand i10" onerror="this.style.display='none'"><h3 class="car-name">GRAND I10</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">350 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Grand i10')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-1"><img class="car-img" src="images/cars5.jpeg" alt="Accent" onerror="this.style.display='none'"><h3 class="car-name">ACCENT</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">400 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Accent Auto')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-2"><img class="car-img" src="images/cars6.jpeg" alt="Logan" onerror="this.style.display='none'"><h3 class="car-name">LOGAN</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Logan')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-2"><img class="car-img" src="images/cars7.jpeg" alt="Stepway" onerror="this.style.display='none'"><h3 class="car-name">STEPWAY</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Stepway')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-2"><img class="car-img" src="images/cars8.jpeg" alt="Sandero" onerror="this.style.display='none'"><h3 class="car-name">SANDERO</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Sandero')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-2"><img class="car-img" src="images/cars9.jpeg" alt="Jogger" onerror="this.style.display='none'"><h3 class="car-name">JOGGER</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 7 Places</span></div><div class="car-price">400 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Jogger')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-2"><img class="car-img" src="images/cars10.jpeg" alt="Stepway" onerror="this.style.display='none'"><h3 class="car-name">STEPWAY</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Stepway')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-3"><img class="car-img" src="images/cars11.jpeg" alt="Duster" onerror="this.style.display='none'"><h3 class="car-name">DUSTER</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">400 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Duster')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-3"><img class="car-img" src="images/cars12.jpeg" alt="Logan" onerror="this.style.display='none'"><h3 class="car-name">LOGAN</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Logan')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-3"><img class="car-img" src="images/cars13.jpeg" alt="Stepway" onerror="this.style.display='none'"><h3 class="car-name">STEPWAY</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Stepway')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-3"><img class="car-img" src="images/cars14.jpeg" alt="Clio 5" onerror="this.style.display='none'"><h3 class="car-name">CLIO 5</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Clio 5')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-3"><img class="car-img" src="images/cars15.jpeg" alt="Clio 5" onerror="this.style.display='none'"><h3 class="car-name">CLIO 5</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Clio 5 Auto')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-4"><img class="car-img" src="images/cars16.jpeg" alt="Creta" onerror="this.style.display='none'"><h3 class="car-name">CRETA</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">450 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Creta')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-4"><img class="car-img" src="images/cars17.jpeg" alt="Haval" onerror="this.style.display='none'"><h3 class="car-name">HAVAL</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">450 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Haval')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-4"><img class="car-img" src="images/cars18.jpeg" alt="Duster" onerror="this.style.display='none'"><h3 class="car-name">DUSTER</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">450 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Duster Auto')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <!-- السيارات الجديدة -->
+    <div class="car-card fade-up fade-up-delay-4"><img class="car-img" src="images/cars19.jpeg" alt="Clio 5" onerror="this.style.display='none'"><h3 class="car-name">CLIO 5</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Manuelle</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">300 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Clio 5')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="car-card fade-up fade-up-delay-4"><img class="car-img" src="images/cars20.jpeg" alt="Tucson" onerror="this.style.display='none'"><h3 class="car-name">TUCSON</h3><div class="car-specs"><span class="car-spec"><i class="fa-solid fa-gears"></i> Automatique</span><span class="car-spec"><i class="fa-solid fa-users"></i> 5 Places</span></div><div class="car-price">600 MAD <span>/ jour</span></div><button class="btn-reserve" onclick="openBookingModalWithCar('Tucson')">Réserver <i class="fa-solid fa-arrow-right"></i></button></div>
+  </div>
+</section>
+
+<section class="info-cards-section" id="info">
+  <div class="section-header fade-up"><h2 class="section-title" data-key="info_title">INFORMATIONS PRATIQUES</h2><p class="section-subtitle" data-key="info_subtitle">Tout ce que vous devez savoir avant de louer</p></div>
+  <div class="info-cards-grid">
+    <div class="info-card fade-up fade-up-delay-1"><div class="info-card-icon blue"><i class="fa-solid fa-id-card"></i></div><h4 data-key="info1_title">Permis de conduire</h4><p data-key="info1_text">Permis de conduire valide avec 2 ans d'ancienneté minimum. Pas de limite d'âge.</p></div>
+    <div class="info-card fade-up fade-up-delay-2"><div class="info-card-icon red"><i class="fa-solid fa-money-bill-wave"></i></div><h4 data-key="info2_title">Caution</h4><p data-key="info2_text">Caution de 20 000 MAD par chèque, espèces ou carte bancaire.</p></div>
+    <div class="info-card fade-up fade-up-delay-3"><div class="info-card-icon green"><i class="fa-solid fa-credit-card"></i></div><h4 data-key="info3_title">Modes de paiement</h4><p data-key="info3_text">Paiement accepté en espèces ou par carte bancaire.</p></div>
+    <div class="info-card fade-up fade-up-delay-4"><div class="info-card-icon orange"><i class="fa-solid fa-globe"></i></div><h4 data-key="info4_title">Ressortissants étrangers</h4><p data-key="info4_text">Mêmes conditions, permis national accepté sans permis international.</p></div>
+  </div>
+</section>
+
+<div class="features-bar">
+  <div class="features-grid">
+    <div class="feature-item fade-up"><div class="feature-icon red"><i class="fa-solid fa-percent"></i></div><div class="feature-text"><h4 data-key="feature1_title">Tarifs compétitifs</h4><p data-key="feature1_text">Meilleur rapport qualité / prix</p></div></div>
+    <div class="feature-item fade-up fade-up-delay-1"><div class="feature-icon blue"><i class="fa-solid fa-infinity"></i></div><div class="feature-text"><h4 data-key="feature2_title">Kilométrage illimité</h4><p data-key="feature2_text">Roulez sans limite</p></div></div>
+    <div class="feature-item fade-up fade-up-delay-2"><div class="feature-icon green"><i class="fa-solid fa-shield-halved"></i></div><div class="feature-text"><h4 data-key="feature3_title">Assurance incluse</h4><p data-key="feature3_text">Voyagez en toute tranquillité</p></div></div>
+    <div class="feature-item fade-up fade-up-delay-3"><div class="feature-icon orange"><i class="fa-regular fa-calendar-xmark"></i></div><div class="feature-text"><h4 data-key="feature4_title">Annulation gratuite</h4><p data-key="feature4_text">Jusqu'à 48h avant la prise en charge</p></div></div>
+    <div class="feature-item fade-up fade-up-delay-4"><div class="feature-icon purple"><i class="fa-solid fa-headset"></i></div><div class="feature-text"><h4 data-key="feature5_title">Support 24/7</h4><p data-key="feature5_text">Nous sommes là pour vous</p></div></div>
+  </div>
+</div>
+
+<section class="cta-banner" id="about">
+  <div class="cta-inner">
+    <div class="cta-text fade-up"><h2 data-key="cta_title">Prêt à prendre la route ?</h2><p data-key="cta_text">Réservez maintenant et profitez d'un service fiable et professionnel.</p><button class="btn-cta" onclick="openBookingModal()" data-key="cta_button">RÉSERVER MAINTENANT</button></div>
+    <div class="cta-car fade-up fade-up-delay-2"><img src="images/cars1.jpeg" alt="Voiture" onerror="this.style.display='none'" style="width:100%;max-width:380px;"></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="margin-bottom:12px;display:inline-flex;"><img src="images/logo.png" alt="Fadma Hsayn Cars" style="height:50px;width:auto;" onerror="this.style.display='none';this.parentElement.querySelector('.logo-text').style.display='flex';"><div class="logo-text" style="margin-left:8px;"><span style="font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1.5px;">FADMA HSAYN</span><span style="font-size:9px;font-weight:500;color:var(--red);letter-spacing:1px;">CARS</span></div></a>
+      <p data-key="footer_desc">Votre partenaire de confiance pour la location de voitures dans les aéroports du Maroc.</p>
+      <div class="footer-socials"><a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a><a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a><a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a></div>
+    </div>
+    <div class="footer-col"><h4 data-key="quick_links">LIENS RAPIDES</h4><ul class="footer-links"><li><a href="#home" onclick="scrollToSection('home')">Accueil</a></li><li><a href="#fleet" onclick="scrollToSection('fleet')">Véhicules</a></li><li><a href="#agencies" onclick="scrollToAgencies()">Nos Agences</a></li><li><a href="#about" onclick="scrollToSection('about')">À Propos</a></li><li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li></ul></div>
+    <div class="footer-col"><h4 data-key="our_agencies">NOS AGENCES</h4><ul class="footer-links"><li><a href="#agencies" onclick="scrollToAgencies()"><i class="fa-solid fa-plane"></i> <span data-key="agency1">وكالة مطار مراكش</span></a></li><li><a href="#agencies" onclick="scrollToAgencies()"><i class="fa-solid fa-map-location-dot"></i> <span data-key="agency2">وكالة مرزوكة</span></a></li><li><a href="#agencies" onclick="scrollToAgencies()"><i class="fa-solid fa-plane"></i> <span data-key="agency3">وكالة مطار الرشيدية</span></a></li></ul></div>
+    <div class="footer-col"><h4 data-key="contact_us">CONTACTEZ-NOUS</h4><div class="footer-contact"><div class="contact-item"><i class="fa-solid fa-phone"></i><span>+212 6 61 37 16 70</span></div><div class="contact-item"><i class="fa-brands fa-whatsapp"></i><span>+212 6 61 37 16 70</span></div><div class="contact-item"><i class="fa-solid fa-envelope"></i><span>fadmahsayncarrs@gmail.com</span></div></div></div>
+  </div>
+  <div class="footer-bottom"><span data-key="copyright">© 2024 FADMA HSAYN CARS. Tous droits réservés.</span></div>
+</footer>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBookingModal()">✕</button>
+    <h2 data-key="booking_form_title">Formulaire de Réservation</h2>
+    <form id="bookingForm" onsubmit="submitBooking(event)">
+      <div class="form-group"><label data-key="full_name">Nom complet *</label><input type="text" id="fullName" required placeholder="Votre nom complet"></div>
+      <div class="form-group"><label data-key="phone_number">Numéro de téléphone *</label><input type="tel" id="phoneNumber" required placeholder="+212 6 XX XX XX XX"></div>
+      <div class="form-group"><label data-key="vehicle">Véhicule souhaité</label><input type="text" id="vehicle" placeholder="Ex: Duster" readonly></div>
+      <div class="form-row">
+        <div class="form-group"><label data-key="pickup_location">Lieu de prise en charge *</label><select id="modalPickup" required><option value="" data-key="select_location">Sélectionnez</option><option value="وكالة مطار مراكش">وكالة مطار مراكش</option><option value="وكالة مرزوكة">وكالة مرزوكة</option><option value="وكالة مطار الرشيدية">وكالة مطار الرشيدية</option><option value="Autre">Autre</option></select></div>
+        <div class="form-group"><label data-key="return_location">Lieu de restitution</label><select id="modalReturn"><option value="" data-key="select_location">Sélectionnez</option><option value="وكالة مطار مراكش">وكالة مطار مراكش</option><option value="وكالة مرزوكة">وكالة مرزوكة</option><option value="وكالة مطار الرشيدية">وكالة مطار الرشيدية</option><option value="Autre">Autre</option></select></div>
+      </div>
+      <div class="form-row"><div class="form-group"><label data-key="pickup_date">Date de prise en charge *</label><input type="date" id="modalPickupDate" required></div><div class="form-group"><label data-key="return_date">Date de restitution *</label><input type="date" id="modalReturnDate" required></div></div>
+      <div class="form-group"><label data-key="notes">Remarques / Notes</label><textarea id="notes" placeholder="Informations supplémentaires..."></textarea></div>
+      <button type="submit" class="btn-submit" data-key="send_whatsapp">ENVOYER VIA WHATSAPP <i class="fa-brands fa-whatsapp"></i></button>
+    </form>
+  </div>
+</div>
+
+<script>
+// ===== DETECT BROWSER LANGUAGE =====
+function detectBrowserLanguage() {
+  const savedLang = localStorage.getItem('preferredLang');
+  if (savedLang) return savedLang;
+  const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+  if (browserLang.startsWith('fr')) return 'fr';
+  if (browserLang.startsWith('ar')) return 'ar';
+  if (browserLang.startsWith('en')) return 'en';
+  return 'ar';
+}
+
+// ===== TOAST =====
+function showToast(m, t='info', d=3000) {
+  const c = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + t;
+  const i = t === 'error' ? 'fa-circle-xmark' : t === 'success' ? 'fa-circle-check' : 'fa-circle-info';
+  toast.innerHTML = '<span><i class="fa-solid ' + i + '"></i> ' + m + '</span><button class="toast-close" onclick="this.parentElement.remove()">✕</button>';
+  c.appendChild(toast);
+  setTimeout(() => { toast.classList.add('hiding'); setTimeout(() => toast.remove(), 400); }, d);
+}
+
+// ===== SCROLL OBSERVER =====
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, observerOptions);
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ===== PARALLAX =====
+window.addEventListener('scroll', () => {
+  const heroImg = document.querySelector('.hero-img');
+  if (heroImg) { const s = window.scrollY; heroImg.style.transform = 'translateY(' + s * 0.3 + 'px) scale(1.05)'; }
+  const n = document.getElementById('navbar');
+  if (n) n.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ===== ACTIVE NAV LINK =====
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
+  document.querySelectorAll('.nav-link').forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
+});
+
+// ===== MOBILE MENU =====
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(l => {
+  l.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; });
+});
+
+// ===== SCROLL TO SECTION =====
+function scrollToSection(id) {
+  const s = document.getElementById(id);
+  if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setActiveLink(id);
+}
+function scrollToAgencies() { scrollToSection('agencies'); }
+function setActiveLink(id) {
+  document.querySelectorAll('.nav-link,.mobile-nav-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.nav-link[data-section="' + id + '"],.mobile-nav-link[data-section="' + id + '"]').forEach(l => l.classList.add('active'));
+}
+
+// ===== BOOKING MODAL =====
+function openBookingModal() { document.getElementById('bookingModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function openBookingModalWithCar(c) { document.getElementById('vehicle').value = c; openBookingModal(); }
+function closeBookingModal() { document.getElementById('bookingModal').classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('bookingModal').addEventListener('click', function(e) { if (e.target === this) closeBookingModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeBookingModal(); });
+
+// ===== SUBMIT BOOKING =====
+function submitBooking(e) {
+  e.preventDefault();
+  const n = document.getElementById('fullName').value.trim();
+  const p = document.getElementById('phoneNumber').value.trim();
+  const v = document.getElementById('vehicle').value.trim();
+  const pu = document.getElementById('modalPickup').value;
+  const re = document.getElementById('modalReturn').value;
+  const pd = document.getElementById('modalPickupDate').value;
+  const rd = document.getElementById('modalReturnDate').value;
+  const no = document.getElementById('notes').value.trim();
+  if (!n || !p || !pu || !pd || !rd) {
+    const msg = currentLang === 'ar' ? 'المرجو ملء جميع الحقول المطلوبة' : currentLang === 'en' ? 'Please fill in all required fields' : 'Veuillez remplir tous les champs obligatoires';
+    showToast(msg, 'error'); return;
+  }
+  const wn = getWhatsAppNumber(pu);
+  let msg = '';
+  if (currentLang === 'ar') {
+    msg = '🚗 *حجز جديد - فضمة احسين كارز*\n\n👤 *الاسم:* ' + n + '\n📞 *الهاتف:* ' + p + '\n';
+    if (v) msg += '🚘 *المركبة:* ' + v + '\n';
+    msg += '📍 *مكان الاستلام:* ' + pu + '\n'; if (re) msg += '🏁 *مكان التسليم:* ' + re + '\n';
+    msg += '📅 *تاريخ الاستلام:* ' + pd + '\n📅 *تاريخ التسليم:* ' + rd + '\n'; if (no) msg += '📝 *ملاحظات:* ' + no + '\n';
+  } else if (currentLang === 'en') {
+    msg = '🚗 *New Booking - Fadma Hsayn Cars*\n\n👤 *Name:* ' + n + '\n📞 *Phone:* ' + p + '\n';
+    if (v) msg += '🚘 *Vehicle:* ' + v + '\n';
+    msg += '📍 *Pick-up:* ' + pu + '\n'; if (re) msg += '🏁 *Return:* ' + re + '\n';
+    msg += '📅 *Pick-up Date:* ' + pd + '\n📅 *Return Date:* ' + rd + '\n'; if (no) msg += '📝 *Notes:* ' + no + '\n';
+  } else {
+    msg = '🚗 *Nouvelle Réservation - Fadma Hsayn Cars*\n\n👤 *Nom:* ' + n + '\n📞 *Téléphone:* ' + p + '\n';
+    if (v) msg += '🚘 *Véhicule:* ' + v + '\n';
+    msg += '📍 *Prise en charge:* ' + pu + '\n'; if (re) msg += '🏁 *Restitution:* ' + re + '\n';
+    msg += '📅 *Date de départ:* ' + pd + '\n📅 *Date de retour:* ' + rd + '\n'; if (no) msg += '📝 *Remarques:* ' + no + '\n';
+  }
+  const sm = currentLang === 'ar' ? 'جاري التحويل إلى واتساب...' : currentLang === 'en' ? 'Redirecting to WhatsApp...' : 'Redirection vers WhatsApp...';
+  showToast(sm, 'success');
+  setTimeout(() => { window.open('https://wa.me/' + wn + '?text=' + encodeURIComponent(msg), '_blank'); closeBookingModal(); document.getElementById('bookingForm').reset(); }, 1000);
+}
+
+// ===== AGENCY MAPS (UPDATED) =====
+const agencyMaps = {
+  marrakech: 'https://maps.app.goo.gl/6PBbUujSAZgu19wF6',
+  merzouga: 'https://maps.app.goo.gl/MNDDZiqPzeL7NQJz6',
+  errachidia: 'https://maps.app.goo.gl/PsfhaXLK4QjHoAcg7'
+};
+const agencyWhatsApp = {
+  'وكالة مطار مراكش': '+212661371670',
+  'وكالة مرزوكة': '+212661371670',
+  'وكالة مطار الرشيدية': '+212661371670'
+};
+function openAgencyMap(agency) {
+  const url = agencyMaps[agency];
+  if (url) window.open(url, '_blank');
+}
+function getWhatsAppNumber(loc) {
+  return agencyWhatsApp[loc] || '+212661371670';
+}
+
+// ===== LANGUAGE SYSTEM =====
+let currentLang = detectBrowserLanguage();
+const translations = {
+  fr: {
+    home:'ACCUEIL',vehicles:'VÉHICULES',agencies:'NOS AGENCES',about:'À PROPOS',contact:'CONTACT',
+    agency1:'وكالة مطار مراكش',agency2:'وكالة مرزوكة',agency3:'وكالة مطار الرشيدية',agency_label_merzouga:'AGENCE',
+    hero_title:'VOTRE VOYAGE<span class="accent">COMMENCE</span>DÈS VOTRE ARRIVÉE',hero_subtitle:'Location de voitures dans les principaux aéroports du Maroc',
+    badge1:'Livraison à l\'aéroport',badge2:'Assurance incluse',badge3:'Support 24/7',
+    pickup_location:'Lieu de prise en charge',pickup_date:'Date de départ',return_date:'Date de retour',select_airport:'Sélectionnez un aéroport',book_now:'RÉSERVER MAINTENANT',
+    agencies_title:'NOS AGENCES',agencies_subtitle:'Nous sommes présents dans les principaux aéroports du Maroc',airport_label:'AÉROPORT',see_agency:'Voir l\'agence',
+    fleet_title:'NOTRE FLOTTE',fleet_subtitle:'Une large sélection de véhicules adaptés à tous vos besoins',
+    info_title:'INFORMATIONS PRATIQUES',info_subtitle:'Tout ce que vous devez savoir avant de louer',
+    info1_title:'Permis de conduire',info1_text:'Permis de conduire valide avec 2 ans d\'ancienneté minimum. Pas de limite d\'âge.',
+    info2_title:'Caution',info2_text:'Caution de 20 000 MAD par chèque, espèces ou carte bancaire.',
+    info3_title:'Modes de paiement',info3_text:'Paiement accepté en espèces ou par carte bancaire.',
+    info4_title:'Ressortissants étrangers',info4_text:'Mêmes conditions, permis national accepté sans permis international.',
+    feature1_title:'Tarifs compétitifs',feature1_text:'Meilleur rapport qualité / prix',feature2_title:'Kilométrage illimité',feature2_text:'Roulez sans limite',
+    feature3_title:'Assurance incluse',feature3_text:'Voyagez en toute tranquillité',feature4_title:'Annulation gratuite',feature4_text:'Jusqu\'à 48h avant la prise en charge',
+    feature5_title:'Support 24/7',feature5_text:'Nous sommes là pour vous',
+    cta_title:'Prêt à prendre la route ?',cta_text:'Réservez maintenant et profitez d\'un service fiable et professionnel.',cta_button:'RÉSERVER MAINTENANT',
+    footer_desc:'Votre partenaire de confiance pour la location de voitures dans les aéroports du Maroc.',
+    quick_links:'LIENS RAPIDES',our_agencies:'NOS AGENCES',contact_us:'CONTACTEZ-NOUS',copyright:'© 2024 FADMA HSAYN CARS. Tous droits réservés.',
+    booking_form_title:'Formulaire de Réservation',full_name:'Nom complet *',phone_number:'Numéro de téléphone *',vehicle:'Véhicule souhaité',
+    return_location:'Lieu de restitution',notes:'Remarques / Notes',send_whatsapp:'ENVOYER VIA WHATSAPP',select_location:'Sélectionnez',reserve:'Réserver',
+    specs_manual:'Manuelle',specs_auto:'Automatique',specs_seats:'Places',price_day:'/ jour'
+  },
+  ar: {
+    home:'الرئيسية',vehicles:'المركبات',agencies:'وكالاتنا',about:'من نحن',contact:'اتصل بنا',
+    agency1:'وكالة مطار مراكش',agency2:'وكالة مرزوكة',agency3:'وكالة مطار الرشيدية',agency_label_merzouga:'وكالة',
+    hero_title:'رحلتك<span class="accent">تبدأ</span>من المطار',hero_subtitle:'تأجير السيارات في المطارات الرئيسية بالمغرب',
+    badge1:'توصيل للمطار',badge2:'تأمين مشمول',badge3:'دعم 24/7',
+    pickup_location:'مكان الاستلام',pickup_date:'تاريخ الاستلام',return_date:'تاريخ التسليم',select_airport:'اختر مطاراً',book_now:'احجز الآن',
+    agencies_title:'وكالاتنا',agencies_subtitle:'متواجدون في المطارات الرئيسية بالمغرب',airport_label:'مطار',see_agency:'عرض الوكالة',
+    fleet_title:'أسطولنا',fleet_subtitle:'تشكيلة واسعة من المركبات تناسب جميع احتياجاتكم',
+    info_title:'معلومات عملية',info_subtitle:'كل ما تحتاج معرفته قبل الاستئجار',
+    info1_title:'رخصة السياقة',info1_text:'رخصة سياقة سارية مع سنتين من الخبرة على الأقل. لا شرط للسن.',
+    info2_title:'الكفالة',info2_text:'كفالة 20.000 درهم بشيك، نقداً أو بالبطاقة البنكية.',
+    info3_title:'طرق الدفع',info3_text:'الدفع مقبول نقداً أو بالبطاقة البنكية.',
+    info4_title:'الأجانب',info4_text:'نفس الشروط، الرخصة الوطنية مقبولة بدون رخصة دولية.',
+    feature1_title:'أسعار تنافسية',feature1_text:'أفضل قيمة مقابل السعر',feature2_title:'كيلوميتراج غير محدود',feature2_text:'سير بلا حدود',
+    feature3_title:'تأمين مشمول',feature3_text:'سافر بكل طمأنينة',feature4_title:'إلغاء مجاني',feature4_text:'قبل 48 ساعة من الاستلام',
+    feature5_title:'دعم 24/7',feature5_text:'نحن هنا لخدمتكم',
+    cta_title:'مستعد للانطلاق؟',cta_text:'احجز الآن واستفد من خدمة موثوقة ومهنية.',cta_button:'احجز الآن',
+    footer_desc:'شريكك الموثوق لتأجير السيارات في مطارات المغرب.',
+    quick_links:'روابط سريعة',our_agencies:'وكالاتنا',contact_us:'اتصل بنا',copyright:'© 2024 فضمة احسين كارز. جميع الحقوق محفوظة.',
+    booking_form_title:'استمارة الحجز',full_name:'الاسم الكامل *',phone_number:'رقم الهاتف *',vehicle:'المركبة المطلوبة',
+    return_location:'مكان التسليم',notes:'ملاحظات',send_whatsapp:'إرسال عبر واتساب',select_location:'اختر',reserve:'حجز',
+    specs_manual:'يدوي',specs_auto:'أوتوماتيك',specs_seats:'مقاعد',price_day:'/ اليوم'
+  },
+  en: {
+    home:'HOME',vehicles:'VEHICLES',agencies:'OUR AGENCIES',about:'ABOUT',contact:'CONTACT',
+    agency1:'Marrakech Airport Agency',agency2:'Merzouga Agency',agency3:'Errachidia Airport Agency',agency_label_merzouga:'AGENCY',
+    hero_title:'YOUR JOURNEY<span class="accent">BEGINS</span>UPON ARRIVAL',hero_subtitle:'Car rental at Morocco\'s main airports',
+    badge1:'Airport Delivery',badge2:'Insurance Included',badge3:'24/7 Support',
+    pickup_location:'Pick-up Location',pickup_date:'Pick-up Date',return_date:'Return Date',select_airport:'Select an airport',book_now:'BOOK NOW',
+    agencies_title:'OUR AGENCIES',agencies_subtitle:'We are present at Morocco\'s main airports',airport_label:'AIRPORT',see_agency:'View Agency',
+    fleet_title:'OUR FLEET',fleet_subtitle:'A wide selection of vehicles for all your needs',
+    info_title:'PRACTICAL INFORMATION',info_subtitle:'Everything you need to know before renting',
+    info1_title:'Driving License',info1_text:'Valid driving license with minimum 2 years of experience. No age limit.',
+    info2_title:'Deposit',info2_text:'Deposit of 20,000 MAD by check, cash or credit card.',
+    info3_title:'Payment Methods',info3_text:'Payment accepted in cash or by credit card.',
+    info4_title:'Foreign Nationals',info4_text:'Same conditions, national license accepted without international permit.',
+    feature1_title:'Competitive Rates',feature1_text:'Best value for money',feature2_title:'Unlimited Mileage',feature2_text:'Drive without limits',
+    feature3_title:'Insurance Included',feature3_text:'Travel with peace of mind',feature4_title:'Free Cancellation',feature4_text:'Up to 48h before pick-up',
+    feature5_title:'24/7 Support',feature5_text:'We are here for you',
+    cta_title:'Ready to hit the road?',cta_text:'Book now and enjoy reliable, professional service.',cta_button:'BOOK NOW',
+    footer_desc:'Your trusted partner for car rental at Morocco\'s airports.',
+    quick_links:'QUICK LINKS',our_agencies:'OUR AGENCIES',contact_us:'CONTACT US',copyright:'© 2024 FADMA HSAYN CARS. All rights reserved.',
+    booking_form_title:'Booking Form',full_name:'Full Name *',phone_number:'Phone Number *',vehicle:'Desired Vehicle',
+    return_location:'Return Location',notes:'Notes',send_whatsapp:'SEND VIA WHATSAPP',select_location:'Select',reserve:'Book',
+    specs_manual:'Manual',specs_auto:'Automatic',specs_seats:'Seats',price_day:'/ day'
+  }
+};
+
+function setLanguage(lang) {
+  currentLang = lang;
+  const htmlRoot = document.getElementById('htmlRoot');
+  const body = document.body;
+  htmlRoot.setAttribute('lang', lang);
+  if (lang === 'ar') { body.classList.add('rtl'); htmlRoot.setAttribute('dir', 'rtl'); }
+  else { body.classList.remove('rtl'); htmlRoot.setAttribute('dir', 'ltr'); }
+
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (translations[lang] && translations[lang][key] !== undefined) {
+      if (key === 'hero_title') el.innerHTML = translations[lang][key];
+      else el.textContent = translations[lang][key];
+    }
+  });
+
+  updateDropdownLinks();
+  updateCarSpecs();
+  localStorage.setItem('preferredLang', lang);
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+  });
+
+  updateMobileMenu();
+}
+
+function updateDropdownLinks() {
+  document.querySelectorAll('.dropdown-menu a').forEach(link => {
+    const key = link.getAttribute('data-key');
+    if (key && translations[currentLang] && translations[currentLang][key]) {
+      link.textContent = translations[currentLang][key];
+    }
+  });
+}
+
+function updateMobileMenu() {
+  const mobileLinks = document.querySelectorAll('.mobile-menu a[data-key]');
+  mobileLinks.forEach(link => {
+    const key = link.getAttribute('data-key');
+    if (key && translations[currentLang] && translations[currentLang][key]) {
+      const icon = link.querySelector('i');
+      if (icon) {
+        link.innerHTML = '';
+        link.appendChild(icon.cloneNode(true));
+        link.appendChild(document.createTextNode(' ' + translations[currentLang][key]));
+      }
+    }
+  });
+}
+
+function updateCarSpecs() {
+  document.querySelectorAll('.car-card').forEach(card => {
+    const specs = card.querySelectorAll('.car-spec');
+    specs.forEach(spec => {
+      const icon = spec.querySelector('i');
+      if (icon && icon.classList.contains('fa-gears')) {
+        const textEl = spec.childNodes[1];
+        if (textEl) {
+          if (textEl.textContent.includes('Manuelle') || textEl.textContent.includes('يدوي') || textEl.textContent.includes('Manual'))
+            textEl.textContent = ' ' + translations[currentLang].specs_manual;
+          else textEl.textContent = ' ' + translations[currentLang].specs_auto;
+        }
+      }
+      if (icon && icon.classList.contains('fa-users')) {
+        const textEl = spec.childNodes[1];
+        if (textEl) { const m = textEl.textContent.match(/\d+/); if (m) textEl.textContent = ' ' + m[0] + ' ' + translations[currentLang].specs_seats; }
+      }
+    });
+    const ps = card.querySelector('.car-price span'); if (ps) ps.textContent = translations[currentLang].price_day;
+    const rb = card.querySelector('.btn-reserve'); if (rb && rb.childNodes[0]) rb.childNodes[0].textContent = translations[currentLang].reserve + ' ';
+  });
+}
+
+// ===== INITIALIZE =====
+setLanguage(currentLang);
+</script>
+</body>
+</html>
